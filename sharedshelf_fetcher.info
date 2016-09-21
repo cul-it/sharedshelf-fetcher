@@ -1,0 +1,10 @@
+; $Id$
+name = "Shared Shelf Fetcher"
+description = "Feeds Fetcher for Sharedshelf API"
+package = Cornell University Library
+core = 7.x
+dependencies[] = sharedshelf_client
+dependencies[] = feeds
+
+
+files[] = sharedshelf_fetcher_fetcher.inc

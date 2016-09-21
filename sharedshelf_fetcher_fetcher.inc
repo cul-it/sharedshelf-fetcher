@@ -92,7 +92,7 @@ class FeedsSharedshelfBatch extends FeedsImportBatch {
 /**
  * Pulls assets from Shared Shelf by project
  */
-class sharedshelffetcher_fetcher extends FeedsFetcher {
+class sharedshelf_fetcher_fetcher extends FeedsFetcher {
 
   private $fetch_options = array();
 
