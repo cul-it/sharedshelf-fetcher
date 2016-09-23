@@ -9,16 +9,16 @@
 /**
  * Implements hook_feeds_plugins().
  */
-function sharedshelffetcher_feeds_plugins() {
+function sharedshelf_fetcher_feeds_plugins() {
   $info = array();
-  $info['sharedshelffetcher_fetcher'] = array(
+  $info['sharedshelf_fetcher_fetcher'] = array(
     'name' => 'Feeds Fetcher for Shared Shelf',
     'description' => 'Fetches feeds files from Shared Shelf.',
     'handler' => array(
       'parent' => 'FeedsHTTPFetcher', // A plugin needs to derive either directly or indirectly from FeedsFetcher, FeedsParser or FeedsProcessor.
-      'class' => 'sharedshelffetcher_fetcher',
-      'file' => 'sharedshelffetcher_fetcher.inc',
-      'path' => drupal_get_path('module', 'sharedshelffetcher'),
+      'class' => 'sharedshelf_fetcher_fetcher',
+      'file' => 'sharedshelf_fetcher_fetcher.inc',
+      'path' => drupal_get_path('module', 'sharedshelf_fetcher'),
     ),
   );
   return $info;
@@ -27,6 +27,6 @@ function sharedshelffetcher_feeds_plugins() {
 /**
  * Implements hook_enable().
  */
-function sharedshelffetcher_enable() {
+function sharedshelf_fetcher_enable() {
   cache_clear_all('plugins:feeds:plugins', 'cache');
 }
