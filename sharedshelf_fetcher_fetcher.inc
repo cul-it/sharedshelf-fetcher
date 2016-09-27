@@ -79,7 +79,8 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     try {
       // TODO: $result is from json_decode - try http://drupal.org/project/feeds_jsonpath_parser
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
-      $result = $this->convert_to_xml($result);
+      //$result = $this->convert_to_xml($result);
+      $result=json_encode($result);
       dpm($result, "result");
     }
     catch (Exception $e) {
