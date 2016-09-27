@@ -62,7 +62,7 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     $xml = new SimpleXMLElement('<root/>');
     $this->data2XML($vals, $xml, "Items");
     $xml_text = $xml->asXML();
-    drupal_set_message($xml_text);
+    //drupal_set_message($xml_text);
     return $xml_text;
   }
 
@@ -79,7 +79,7 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     try {
       // TODO: $result is from json_decode - try http://drupal.org/project/feeds_jsonpath_parser
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
-      // TODO: $result = $this->convert_to_xml($result);
+      $result = $this->convert_to_xml($result);
       dpm($result, "result");
     }
     catch (Exception $e) {
