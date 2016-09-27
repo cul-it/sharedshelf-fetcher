@@ -10,7 +10,7 @@
  * Definition of the import batch object created on the fetching stage by
  * FeedsHTTPFetcher.
  */
-class FeedsSharedshelfBatch extends FeedsImportBatch {
+class FeedsSharedshelfResult extends FeedsFetcherResult {
   protected $config;
 
   /**
@@ -127,7 +127,7 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
     $source_config = $source->getConfigFor($this);
     $client = $source_config['client'];
     $config = array('client' => $source_config['client'], 'settings' => $this->config);
-    return new FeedsSharedshelfBatch($config, $source->feed_nid);
+    return new FeedsSharedshelfResult($config, $source->feed_nid);
   }
 
   /**
