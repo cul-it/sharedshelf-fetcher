@@ -10,7 +10,7 @@
  * Definition of the import batch object created on the fetching stage by
  * FeedsHTTPFetcher.
  */
-class FeedsSharedshelfBatch extends FeedsImportBatch {
+class FeedsSharedshelfResult extends FeedsFetcherResult {
   protected $config;
 
   /**
@@ -75,14 +75,15 @@ class FeedsSharedshelfBatch extends FeedsImportBatch {
     $project_id = $this->config['settings']['project_id'];
     $asset_id = $this->config['settings']['asset_id'];
     $thumbnail_size = $this->config['settings']['thumbnail_size'];
+    dpm($this->config, "configuration getRaw");
     try {
       // TODO: $result is from json_decode - try http://drupal.org/project/feeds_jsonpath_parser
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
       // TODO: $result = $this->convert_to_xml($result);
-      dsm($result);
+      dpm($result, "result");
     }
     catch (Exception $e) {
-      dsm($e->getMessage);
+      dpm($e->getMessage, "message");
     }
 
     return $result;
@@ -127,7 +128,7 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
     $source_config = $source->getConfigFor($this);
     $client = $source_config['client'];
     $config = array('client' => $source_config['client'], 'settings' => $this->config);
-    return new FeedsSharedshelfBatch($config, $source->feed_nid);
+    return new FeedsSharedshelfResult($config, $source->feed_nid);
   }
 
   /**
@@ -204,7 +205,7 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
     $connections = clients_connection_load_all();
     $dropdown_array = array('0' => '--none--');
     foreach ($connections as $name => $conn) {
-      if ($conn->type == 'shared_shelf') {
+      if ($conn->type == 'sharedshelf_client') {
         $key = $conn->cid;
         $val = $conn->name; // machine name
         $dropdown_array["$val"] = $val;
@@ -217,7 +218,7 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
       '#key_type' => 'associative',
       '#options' => $dropdown_array,
       '#title' => t('Select a client'),
-      '#description' => t('If the right ARTstore client is not here add one at admin/build/clients.'),
+      '#description' => t('If the right Sharedshelf client is not here add one at /admin/structure/clients.'),
       '#default_value' => isset($source_config['client']) ? $source_config['client'] : 0,
       '#required' => TRUE,
     );
