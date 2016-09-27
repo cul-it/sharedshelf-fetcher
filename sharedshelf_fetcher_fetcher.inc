@@ -204,7 +204,7 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
     $connections = clients_connection_load_all();
     $dropdown_array = array('0' => '--none--');
     foreach ($connections as $name => $conn) {
-      if ($conn->type == 'shared_shelf') {
+      if ($conn->type == 'sharedshelf_client') {
         $key = $conn->cid;
         $val = $conn->name; // machine name
         $dropdown_array["$val"] = $val;
