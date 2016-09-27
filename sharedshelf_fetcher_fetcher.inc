@@ -218,7 +218,7 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
       '#key_type' => 'associative',
       '#options' => $dropdown_array,
       '#title' => t('Select a client'),
-      '#description' => t('If the right ARTstore client is not here add one at admin/build/clients.'),
+      '#description' => t('If the right Sharedshelf client is not here add one at /admin/structure/clients.'),
       '#default_value' => isset($source_config['client']) ? $source_config['client'] : 0,
       '#required' => TRUE,
     );
