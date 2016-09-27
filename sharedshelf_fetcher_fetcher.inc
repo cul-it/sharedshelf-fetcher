@@ -80,10 +80,10 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
       // TODO: $result is from json_decode - try http://drupal.org/project/feeds_jsonpath_parser
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
       // TODO: $result = $this->convert_to_xml($result);
-      dsm($result);
+      dpm($result, "result");
     }
     catch (Exception $e) {
-      dsm($e->getMessage);
+      dpm($e->getMessage, "message");
     }
 
     return $result;
