@@ -31,9 +31,8 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     $asset_id = $this->config['settings']['asset_id'];
     $thumbnail_size = $this->config['settings']['thumbnail_size'];
     try {
-      // TODO: $result is from json_decode - try http://drupal.org/project/feeds_jsonpath_parser
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
-      //$result=json_encode($result);
+      dpm($result);
     }
     catch (Exception $e) {
       dpm($e->getMessage, "message");
