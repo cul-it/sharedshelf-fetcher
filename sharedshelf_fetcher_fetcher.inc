@@ -57,7 +57,8 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
     // setup the option arrays.
     $this->fetch_options = array(
       'projects' => t('List Projects'),
-      'projects.assets' => t('List Assets for a Project'),
+      'projects.assets' => t('Assets for a Project - NO!!!'),
+      'feeds.assets' => t('Assets metadata and images for a Project')
       'asset' => t('Asset'),
     );
 
