@@ -32,7 +32,6 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     $thumbnail_size = $this->config['settings']['thumbnail_size'];
     try {
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
-      dpm($result);
     }
     catch (Exception $e) {
       dpm($e->getMessage, "message");
