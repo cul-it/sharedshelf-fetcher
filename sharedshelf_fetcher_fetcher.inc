@@ -20,51 +20,6 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     $this->config = $config;
     parent::__construct('', $feed_nid);
   }
-  /**
-   * Create XML using string or array
-   *
-   * @param mixed $data input data
-   * @param SimpleXMLElement $xml
-   * @param string $child name of first level child
-   *
-   * @return adding Xml formated data into SimpleXmlElement
-   *
-   * from http://php.net/manual/en/simplexmlelement.addchild.php#111087
-   */
-
-  private function data2XML(array $data, SimpleXMLElement $xml, $child = "items") {
-    foreach ($data as $key => $val) {
-      if (is_array($val)) {
-
-        if (is_numeric($key)) {
-          $node  = $xml->addChild($child);
-          $nodes = $node->getName($child);
-        }
-        else {
-
-          $node  = $xml->addChild($key);
-          $nodes = $node->getName($key);
-        }
-
-        $node->addChild($nodes, self::data2Xml($val, $node));
-      }
-      else {
-        $xml->addChild($key, $val);
-      }
-    }
-
-  }
-
-  /**
-   * convert returned array into xml
-   */
-  private function convert_to_xml($vals) {
-    $xml = new SimpleXMLElement('<root/>');
-    $this->data2XML($vals, $xml, "Items");
-    $xml_text = $xml->asXML();
-    drupal_set_message($xml_text);
-    return $xml_text;
-  }
 
   /**
    * Implementation of FeedsImportBatch::getRaw();
@@ -75,12 +30,8 @@ class FeedsSharedshelfResult extends FeedsFetcherResult {
     $project_id = $this->config['settings']['project_id'];
     $asset_id = $this->config['settings']['asset_id'];
     $thumbnail_size = $this->config['settings']['thumbnail_size'];
-    dpm($this->config, "configuration getRaw");
     try {
-      // TODO: $result is from json_decode - try http://drupal.org/project/feeds_jsonpath_parser
       $result = clients_connection_call($client, $method_name, $project_id, $asset_id, $thumbnail_size);
-      // TODO: $result = $this->convert_to_xml($result);
-      dpm($result, "result");
     }
     catch (Exception $e) {
       dpm($e->getMessage, "message");
@@ -106,7 +57,8 @@ class sharedshelf_fetcher_fetcher extends FeedsFetcher {
     // setup the option arrays.
     $this->fetch_options = array(
       'projects' => t('List Projects'),
-      'projects.assets' => t('List Assets for a Project'),
+      'projects.assets' => t('Assets for a Project - NO!!!'),
+      'feeds.assets' => t('Assets metadata and images for a Project'),
       'asset' => t('Asset'),
     );
 
